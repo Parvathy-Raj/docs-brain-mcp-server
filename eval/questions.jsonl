@@ -1,0 +1,40 @@
+{"q": "How do I run cleanup code after the response is sent, like closing a database session?", "expected": ["tutorial/dependencies/dependencies-with-yield.md"], "set": "broad"}
+{"q": "My endpoint sends an email but I don't want the client to wait for it to finish", "expected": ["tutorial/background-tasks.md"], "set": "broad"}
+{"q": "The browser blocks calls from my React app on localhost:3000 to my API", "expected": ["tutorial/cors.md"], "set": "broad"}
+{"q": "How do I return 201 instead of 200 when something is created?", "expected": ["tutorial/response-status-code.md"], "set": "broad"}
+{"q": "How do I stop the password field from showing up in what my endpoint returns?", "expected": ["tutorial/response-model.md", "tutorial/extra-models.md"], "set": "broad"}
+{"q": "Split my app into several files with one router per module", "expected": ["tutorial/bigger-applications.md"], "set": "broad"}
+{"q": "Swap the real database dependency for a fake one during tests", "expected": ["advanced/testing-dependencies.md", "how-to/testing-database.md"], "set": "broad"}
+{"q": "Read a secret key and other config from environment variables with pydantic", "expected": ["advanced/settings.md"], "set": "broad"}
+{"q": "Load an ML model once when the server starts and free it at shutdown", "expected": ["advanced/events.md"], "set": "broad"}
+{"q": "Accept an uploaded file and read its bytes", "expected": ["tutorial/request-files.md", "tutorial/request-forms-and-files.md"], "set": "broad"}
+{"q": "Issue signed tokens at login and verify them on every request", "expected": ["tutorial/security/oauth2-jwt.md"], "set": "broad"}
+{"q": "Make an integer path parameter only accept values between 1 and 1000", "expected": ["tutorial/path-params-numeric-validations.md"], "set": "broad"}
+{"q": "Query parameter max_length and regex pattern validation", "expected": ["tutorial/query-params-str-validations.md"], "set": "broad"}
+{"q": "Return a 404 with a custom JSON body when an item doesn't exist", "expected": ["tutorial/handling-errors.md"], "set": "broad"}
+{"q": "Add a header with the processing time to every response", "expected": ["tutorial/middleware.md"], "set": "broad"}
+{"q": "My app runs behind nginx under an /api prefix and the docs page breaks", "expected": ["advanced/behind-a-proxy.md"], "set": "broad"}
+{"q": "Update only the fields the client actually sent in a PATCH", "expected": ["tutorial/body-updates.md"], "set": "broad"}
+{"q": "Serve images and CSS files from a folder", "expected": ["tutorial/static-files.md"], "set": "broad"}
+{"q": "Two-way real-time messages with the browser for a chat app", "expected": ["advanced/websockets.md"], "set": "broad"}
+{"q": "Run several processes so the app uses all CPU cores", "expected": ["deployment/server-workers.md"], "set": "broad"}
+{"q": "Build a container image for my FastAPI app", "expected": ["deployment/docker.md"], "set": "broad"}
+{"q": "Should my path functions use async def or plain def?", "expected": ["async.md"], "set": "broad"}
+{"q": "Turn off the interactive API docs in production", "expected": ["how-to/conditional-openapi.md"], "set": "broad"}
+{"q": "Generate a TypeScript client from my OpenAPI schema", "expected": ["advanced/generate-clients.md"], "set": "broad"}
+{"q": "Show an example request payload in the Swagger UI", "expected": ["tutorial/schema-extra-example.md"], "set": "broad"}
+{"q": "What status code does RedirectResponse use by default?", "expected": ["advanced/custom-response.md"], "set": "specific"}
+{"q": "Stop FastAPI from turning underscores into hyphens in a header name", "expected": ["tutorial/header-params.md"], "set": "specific"}
+{"q": "Can I still use a database session from a yield dependency inside a background task?", "expected": ["tutorial/dependencies/dependencies-with-yield.md"], "set": "specific"}
+{"q": "How does a dependency find out which permission scopes the endpoint requires?", "expected": ["advanced/security/oauth2-scopes.md"], "set": "specific"}
+{"q": "Compare a username and password safely against timing attacks", "expected": ["advanced/security/http-basic-auth.md"], "set": "specific"}
+{"q": "Mount an existing Flask app inside my FastAPI app", "expected": ["advanced/wsgi.md"], "set": "specific"}
+{"q": "Return XML instead of JSON from one endpoint", "expected": ["advanced/response-directly.md", "advanced/custom-response.md"], "set": "specific"}
+{"q": "Accept a query parameter that appears several times, like ?q=a&q=b", "expected": ["tutorial/query-params-str-validations.md"], "set": "specific"}
+{"q": "Call the same sub-dependency twice in one request without it being cached", "expected": ["tutorial/dependencies/sub-dependencies.md"], "set": "specific"}
+{"q": "Set a cookie on the response", "expected": ["advanced/response-cookies.md"], "set": "specific"}
+{"q": "Change the status code inside the function depending on whether the item already existed", "expected": ["advanced/response-change-status-code.md"], "set": "specific"}
+{"q": "Leave out fields that were never set from the returned JSON", "expected": ["tutorial/response-model.md"], "set": "specific"}
+{"q": "Turn a Pydantic model containing datetimes into something json.dumps accepts", "expected": ["tutorial/encoder.md"], "set": "specific"}
+{"q": "Make Swagger UI load its JavaScript from my own server instead of a CDN", "expected": ["how-to/custom-docs-ui-assets.md"], "set": "specific"}
+{"q": "Add a description, version and contact info at the top of the docs page", "expected": ["tutorial/metadata.md"], "set": "specific"}

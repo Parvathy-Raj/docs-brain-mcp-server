@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "docs-brain"
+version = "0.1.0"
+description = "MCP server for hybrid search over the FastAPI docs, with citations and a prompt-injection guard"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "mcp[cli]>=2.3",
+    "chromadb>=1.0",
+    "sentence-transformers>=5.0",
+    "rank_bm25>=0.2.2",
+]
+
+[project.scripts]
+docs-brain = "docs_brain.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = ["data"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "docs-brain": {
+      "command": "C:\Users\HP\Projects\docs-brain\.venv\Scripts\python.exe",
+      "args": ["-m", "docs_brain.server"],
+      "env": {
+        "DOCS_BRAIN_HOME": "C:\Users\HP\Projects\docs-brain"
+      }
+    }
+  }
+}
