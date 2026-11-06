@@ -4,7 +4,7 @@
 {"q": "How do I return 201 instead of 200 when something is created?", "expected": ["tutorial/response-status-code.md"], "set": "broad"}
 {"q": "How do I stop the password field from showing up in what my endpoint returns?", "expected": ["tutorial/response-model.md", "tutorial/extra-models.md"], "set": "broad"}
 {"q": "Split my app into several files with one router per module", "expected": ["tutorial/bigger-applications.md"], "set": "broad"}
-{"q": "Swap the real database dependency for a fake one during tests", "expected": ["advanced/testing-dependencies.md", "how-to/testing-database.md"], "set": "broad"}
+{"q": "Swap the real database dependency for a fake one during tests", "expected": ["advanced/testing-dependencies.md"], "set": "broad"}
 {"q": "Read a secret key and other config from environment variables with pydantic", "expected": ["advanced/settings.md"], "set": "broad"}
 {"q": "Load an ML model once when the server starts and free it at shutdown", "expected": ["advanced/events.md"], "set": "broad"}
 {"q": "Accept an uploaded file and read its bytes", "expected": ["tutorial/request-files.md", "tutorial/request-forms-and-files.md"], "set": "broad"}
@@ -24,12 +24,12 @@
 {"q": "Generate a TypeScript client from my OpenAPI schema", "expected": ["advanced/generate-clients.md"], "set": "broad"}
 {"q": "Show an example request payload in the Swagger UI", "expected": ["tutorial/schema-extra-example.md"], "set": "broad"}
 {"q": "What status code does RedirectResponse use by default?", "expected": ["advanced/custom-response.md"], "set": "specific"}
-{"q": "Stop FastAPI from turning underscores into hyphens in a header name", "expected": ["tutorial/header-params.md"], "set": "specific"}
-{"q": "Can I still use a database session from a yield dependency inside a background task?", "expected": ["tutorial/dependencies/dependencies-with-yield.md"], "set": "specific"}
+{"q": "Stop FastAPI from turning underscores into hyphens in a header name", "expected": ["tutorial/header-params.md", "tutorial/header-param-models.md"], "set": "specific"}
+{"q": "Can I still use a database session from a yield dependency inside a background task?", "expected": ["advanced/advanced-dependencies.md"], "set": "specific"}
 {"q": "How does a dependency find out which permission scopes the endpoint requires?", "expected": ["advanced/security/oauth2-scopes.md"], "set": "specific"}
 {"q": "Compare a username and password safely against timing attacks", "expected": ["advanced/security/http-basic-auth.md"], "set": "specific"}
 {"q": "Mount an existing Flask app inside my FastAPI app", "expected": ["advanced/wsgi.md"], "set": "specific"}
-{"q": "Return XML instead of JSON from one endpoint", "expected": ["advanced/response-directly.md", "advanced/custom-response.md"], "set": "specific"}
+{"q": "Return XML instead of JSON from one endpoint", "expected": ["advanced/response-directly.md"], "set": "specific"}
 {"q": "Accept a query parameter that appears several times, like ?q=a&q=b", "expected": ["tutorial/query-params-str-validations.md"], "set": "specific"}
 {"q": "Call the same sub-dependency twice in one request without it being cached", "expected": ["tutorial/dependencies/sub-dependencies.md"], "set": "specific"}
 {"q": "Set a cookie on the response", "expected": ["advanced/response-cookies.md"], "set": "specific"}

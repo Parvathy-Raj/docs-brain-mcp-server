@@ -8,3 +8,4 @@ data/bm25.pkl
 .ruff_cache/
 data/chunks.jsonl
 *.egg-info/
+eval/last_run.log

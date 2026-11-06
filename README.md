@@ -1,7 +1,10 @@
 # Docs Brain
 
-> **Demo:** _add `docs/demo.gif` here: Claude Desktop answering a FastAPI question by calling
-> `search_docs`, then `get_page`, and citing the docs._
+![Docs Brain demo: an MCP client searching the FastAPI docs and getting cited sections back](docs/demo.gif)
+
+_A real stdio session with the server (recorded by [`scripts/make_demo_gif.py`](scripts/make_demo_gif.py)):
+paraphrased questions find the right sections with citation URLs, and a path-traversal attempt
+is refused._
 
 **An MCP server that gives any AI client (Claude Desktop, Cursor, ...) searchable, citable
 access to the FastAPI documentation.** It combines semantic and keyword search (hybrid
@@ -68,6 +71,17 @@ Edit Config) and restart Claude Desktop:
 }
 ```
 
+Or let the script do it. **Quit Claude Desktop fully first** (system tray > Quit), because a
+running Claude can rewrite its config from memory and drop the entry. Then run this from a
+normal PowerShell window:
+
+```bash
+.venv\Scripts\python.exe scripts\install_claude_desktop.py
+```
+
+It finds the config (including the `%LOCALAPPDATA%\Claude-Data\...` location some installs
+use), backs it up and adds the entry with absolute paths.
+
 **Use absolute paths.** A relative path, or plain `python` that resolves to a different
 interpreter, is the most common reason a server doesn't show up. Cursor uses the same block in
 `~/.cursor/mcp.json` (see [`examples/`](examples/)).
@@ -100,28 +114,33 @@ expected page is among the top 5 chunks returned.
 
 | Mode | Recall@5 (all 40) | Recall@5 broad | Recall@5 specific | Recall@1 | MRR | Median latency |
 |---|---|---|---|---|---|---|
-| Dense only (bge-small) | **95%** | 96% | 93% | 70% | 0.80 | 64 ms |
-| BM25 only | **88%** | 84% | 93% | 68% | 0.75 | 7 ms |
-| Hybrid (dense + BM25, RRF) | **95%** | 96% | 93% | **75%** | **0.82** | 67 ms |
-| Hybrid + bge-reranker-base | **98%** | 96% | 100% | 70% | 0.80 | 13,715 ms |
-| Hybrid + MiniLM-L6 reranker | **98%** | 96% | 100% | 68% | 0.79 | 2,789 ms |
+| Dense only (bge-small) | 95% | 96% | 93% | 75% | 0.83 | 26 ms |
+| BM25 only | 90% | 84% | 100% | 72% | 0.79 | 3 ms |
+| **Hybrid (dense + BM25, RRF)** | **98%** | 96% | 100% | **80%** | **0.86** | 31 ms |
+| Hybrid + bge-reranker-base | 98% | 96% | 100% | 72% | 0.82 | 10,906 ms |
+| Hybrid + MiniLM-L6 reranker | 95% | 96% | 93% | 72% | 0.82 | 1,757 ms |
 
-CPU only (4 threads). Reproduce with `python eval/run_eval.py --misses`.
+CPU only (4 threads). Reproduce with `python eval/run_eval.py --misses`. Every label was checked
+by hand against the docs text; [`eval/LABELS.md`](eval/LABELS.md) lists the rule and the four
+labels the audit corrected.
 
 **What the numbers say**
 
-- **Hybrid is the default.** It matches dense recall@5 and raises recall@1 from 70% to 75% for
-  3 ms more. Each retriever covers the other's misses: dense search missed "mount an existing
-  Flask app" (it returned Sub Applications), and BM25's exact match on *Flask* brought the WSGI
-  page back. BM25 alone missed "I don't want the client to wait for the email", where no
-  keyword matches, and dense search found Background Tasks.
-- **Reranking is opt-in.** Both cross-encoders found one more page (95% to 98%: the "hide the
-  password field" question), but they made top-1 ranking slightly worse and cost 40-200× the
-  latency on CPU. One question out of 40 isn't a significant difference. `bge-reranker-base`
-  also pushed the correct CORS page from #1 out of the top 5.
-- **The dense baseline is already strong** on a single, well-written docs site. The honest
-  conclusion is that retrieval quality here is limited by the size of the question set, not
-  the model: a larger and harder set is the next step.
+- **Hybrid wins on every quality metric**: recall@5 from 95% to 98%, recall@1 from 75% to 80%,
+  MRR from 0.83 to 0.86, for 5 ms more than dense. Each retriever covers the other's misses:
+  dense search missed "mount an existing Flask app" (it returned Sub Applications), and BM25's
+  exact match on *Flask* brought the WSGI page back. BM25 alone missed "I don't want the client
+  to wait for the email", where no keyword matches, and dense search found Background Tasks.
+  BM25 is perfect on the specific questions (exact names like `convert_underscores`) and weak on
+  broad paraphrases, and dense search is the reverse. That's the case for fusing them.
+- **Reranking didn't help, so it's opt-in.** Neither cross-encoder beat hybrid on recall@5,
+  both lowered recall@1 from 80% to 72%, and they cost 55-350× the latency on CPU.
+  `bge-reranker-base` pushed the correct CORS page from #1 out of the top 5. MiniLM dropped the
+  XML answer. General-purpose rerankers trained on web search don't know that "the browser
+  blocks my React app" means CORS.
+- **Caveat:** with 40 questions, one question is 2.5 points, so gaps of one or two questions
+  could be noise. The clearest gap is hybrid vs. the rerankers on recall@1 (3 questions). A
+  larger, harder set is the next step.
 
 ## Security: prompt-injection guard
 
