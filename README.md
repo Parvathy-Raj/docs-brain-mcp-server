@@ -189,6 +189,8 @@ Run `python -m docs_brain.ingest` again afterwards to go back to the clean index
 
 ## Design choices
 
+> Architecture diagram, design trade-offs, what failed and what I'd change: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 - **Chunking by heading (H1-H3)**, capped at ~400 tokens (1,600 chars) with a one-paragraph
   overlap. Each chunk keeps `path`, page `title`, `heading_path` and the heading `anchor`, so
   every result links to the exact section (`.../tutorial/cors/#use-corsmiddleware`). Code
